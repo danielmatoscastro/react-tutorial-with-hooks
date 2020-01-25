@@ -1,6 +1,16 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Board from './Board';
+
+const StyledGame = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const StyledGameInfo = styled.div`
+  margin-left: 20px;
+`;
 
 function Game() {
   const [history, setHistory] = useState([{
@@ -127,15 +137,13 @@ function Game() {
   const status = defineStatus(current);
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board
-          squares={current.squares}
-          onClick={(i) => handleClick(i)}
-          winLine={current.winLine}
-        />
-      </div>
-      <div className="game-info">
+    <StyledGame>
+      <Board
+        squares={current.squares}
+        onClick={(i) => handleClick(i)}
+        winLine={current.winLine}
+      />
+      <StyledGameInfo>
         <div>{status}</div>
         <div>{lastPosition}</div>
         <label htmlFor="order-checkboox">
@@ -143,8 +151,8 @@ function Game() {
           <input type="checkbox" id="order-checkboox" onChange={(e) => handleChangeCheckbox(e)} checked={ascOrder} />
         </label>
         <ol>{moves}</ol>
-      </div>
-    </div>
+      </StyledGameInfo>
+    </StyledGame>
   );
 }
 

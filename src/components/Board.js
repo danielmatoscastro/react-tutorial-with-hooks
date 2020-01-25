@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Square from './Square';
+
+const StyledBoardRow = styled.div`
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+`;
 
 function Board({ winLine, squares, onClick }) {
   function renderSquare(i) {
@@ -22,7 +31,7 @@ function Board({ winLine, squares, onClick }) {
     for (let j = 0; j < 3; j += 1) {
       linha.push(renderSquare(3 * i + j));
     }
-    linhas.push(<div className="board-row" key={i}>{linha}</div>);
+    linhas.push(<StyledBoardRow key={i}>{linha}</StyledBoardRow>);
   }
 
   return (
