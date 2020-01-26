@@ -1,15 +1,12 @@
-/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import calculateWinner from '../calculateWinner';
 import Board from './Board';
+import GameInfo from './GameInfo';
 
 const StyledGame = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const StyledGameInfo = styled.div`
-  margin-left: 20px;
 `;
 
 function Game() {
@@ -21,27 +18,6 @@ function Game() {
   }]);
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
-  const [ascOrder, setAscOrder] = useState(true);
-
-  function calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i += 1) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return { winner: squares[a], line: lines[i] };
-      }
-    }
-    return null;
-  }
 
   function handleClick(i) {
     const positions = [
@@ -87,54 +63,7 @@ function Game() {
     setXIsNext((step % 2) === 0);
   }
 
-  function handleChangeCheckbox(e) {
-    setAscOrder(e.target.checked);
-  }
-
-  function defineStatus(current) {
-    const result = calculateWinner(current.squares);
-    let status;
-    if (result) {
-      status = `Winner: ${result.winner}`;
-    } else if (current.draw) {
-      status = 'Tie in the game!';
-    } else {
-      status = `Next player: ${xIsNext ? 'X' : 'O'}`;
-    }
-
-    return status;
-  }
-
-  function defineLastPosition() {
-    const current = history[stepNumber];
-
-    return current.position.every((p) => p == null)
-      ? ''
-      : `Last position clicked: (${current.position[0]}, ${current.position[1]})`;
-  }
-
-  function renderMoves() {
-    let moves = history.map((step, move) => {
-      const desc = move ? `Go to move #${move}` : 'Go to game start';
-      return (
-        <li key={move}>
-          <button type="button" onClick={() => jumpTo(move)}>
-            {move === stepNumber ? <b>{desc}</b> : desc}
-          </button>
-        </li>
-      );
-    });
-
-    if (!ascOrder) {
-      moves = moves.reverse();
-    }
-    return moves;
-  }
-
   const current = history[stepNumber];
-  const lastPosition = defineLastPosition();
-  const moves = renderMoves(history);
-  const status = defineStatus(current);
 
   return (
     <StyledGame>
@@ -143,15 +72,13 @@ function Game() {
         onClick={(i) => handleClick(i)}
         winLine={current.winLine}
       />
-      <StyledGameInfo>
-        <div>{status}</div>
-        <div>{lastPosition}</div>
-        <label htmlFor="order-checkboox">
-          Ordem ascendente
-          <input type="checkbox" id="order-checkboox" onChange={(e) => handleChangeCheckbox(e)} checked={ascOrder} />
-        </label>
-        <ol>{moves}</ol>
-      </StyledGameInfo>
+      <GameInfo
+        history={history}
+        stepNumber={stepNumber}
+        xIsNext={xIsNext}
+        jumpTo={jumpTo}
+      />
+
     </StyledGame>
   );
 }
