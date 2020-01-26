@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Square from './Square';
 
+const StyledBoard = styled.div`
+  width: 60%;
+`;
+
 const StyledBoardRow = styled.div`
+  display: flex;
+  justify-content: center;
   &:after {
     clear: both;
     content: "";
@@ -35,9 +41,9 @@ function Board({ winLine, squares, onClick }) {
   }
 
   return (
-    <div>
+    <StyledBoard>
       {linhas}
-    </div>
+    </StyledBoard>
   );
 }
 

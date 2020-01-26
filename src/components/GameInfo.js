@@ -5,7 +5,31 @@ import styled from 'styled-components';
 import calculateWinner from '../calculateWinner';
 
 const StyledGameInfo = styled.div`
-  margin-left: 20px;
+    width: 40%;
+    margin-left: 20px;
+
+    & ol{
+        list-style-type: none;
+        padding: 0;
+    }
+
+    & button {
+        width: 70%;
+        background-color: #61DAFB;
+        border: none;
+        border-bottom: 1px solid #20232A;
+        font-size: 18px;
+    }
+
+    & input[type=checkbox] {
+        background-color: #61DAFB;
+        
+    }
+
+    & .info{
+        margin-bottom: 5px;
+        font-size: 20px;
+    }
 `;
 
 function GameInfo(props) {
@@ -59,9 +83,9 @@ function GameInfo(props) {
 
   return (
     <StyledGameInfo>
-      <div>{status}</div>
-      <div>{lastPosition}</div>
-      <label htmlFor="order-checkboox">
+      <div className="info">{status}</div>
+      <div className="info">{lastPosition}</div>
+      <label htmlFor="order-checkboox" className="info">
         {ascOrder ? 'Ascending order' : 'Descending order'}
         <input type="checkbox" id="order-checkboox" onChange={(e) => setAscOrder(e.target.checked)} checked={ascOrder} />
       </label>

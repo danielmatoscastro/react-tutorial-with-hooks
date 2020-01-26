@@ -3,25 +3,24 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledSquare = styled.button`
-  background: ${(props) => (props.inWinLine ? '#f00' : '#fff')};
+  background: ${(props) => (props.inWinLine ? '#61DAFB' : '#fff')};
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 48px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 112px;
+  height: 112px;
 
   &:focus{
     outline: none;
-    background: ${(props) => (props.inWinLine ? '#f00' : '#ddd')};
+    background: ${(props) => (props.inWinLine ? '#61DAFB' : '#ddd')};
   }
 `;
-
 
 function Square(props) {
   const { inWinLine, onClick, value } = props;

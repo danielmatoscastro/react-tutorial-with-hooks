@@ -7,6 +7,9 @@ import GameInfo from './GameInfo';
 const StyledGame = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  max-width: 33%;
+  margin: 300px auto 0;
 `;
 
 function Game() {
