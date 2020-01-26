@@ -14,11 +14,7 @@ function GameInfo(props) {
   } = props;
   const [ascOrder, setAscOrder] = useState(true);
 
-  function handleChangeCheckbox(e) {
-    setAscOrder(e.target.checked);
-  }
-
-  function defineStatus(current) {
+  function defineStatus(current, xIsNextPlayer) {
     const result = calculateWinner(current.squares);
     let status;
     if (result) {
@@ -26,7 +22,7 @@ function GameInfo(props) {
     } else if (current.draw) {
       status = 'Tie in the game!';
     } else {
-      status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+      status = `Next player: ${xIsNextPlayer ? 'X' : 'O'}`;
     }
 
     return status;
@@ -57,17 +53,17 @@ function GameInfo(props) {
   }
 
   const current = history[stepNumber];
-  const status = defineStatus(current);
+  const status = defineStatus(current, xIsNext);
   const lastPosition = defineLastPosition(current);
-  const moves = renderMoves(history);
+  const moves = renderMoves();
 
   return (
     <StyledGameInfo>
       <div>{status}</div>
       <div>{lastPosition}</div>
       <label htmlFor="order-checkboox">
-      Ordem ascendente
-        <input type="checkbox" id="order-checkboox" onChange={(e) => handleChangeCheckbox(e)} checked={ascOrder} />
+        {ascOrder ? 'Ascending order' : 'Descending order'}
+        <input type="checkbox" id="order-checkboox" onChange={(e) => setAscOrder(e.target.checked)} checked={ascOrder} />
       </label>
       <ol>{moves}</ol>
     </StyledGameInfo>
