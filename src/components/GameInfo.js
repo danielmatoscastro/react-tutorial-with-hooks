@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import calculateWinner from '../calculateWinner';
 
 const StyledGameInfo = styled.div`
-    width: 40%;
-    margin-left: 20px;
+    width: min(100%, 300px);
+    margin: 35px auto 0;
 
     & ol{
         list-style-type: none;
@@ -14,11 +14,14 @@ const StyledGameInfo = styled.div`
     }
 
     & button {
-        width: 70%;
+        width: 100%;
         background-color: #61DAFB;
         border: none;
         border-bottom: 1px solid #20232A;
-        font-size: 18px;
+        font-size: 16px;
+        display: block;
+        margin: auto;
+
     }
 
     & input[type=checkbox] {
@@ -28,7 +31,18 @@ const StyledGameInfo = styled.div`
 
     & .info{
         margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    @media (min-width: 991.98px) {
+      margin: 0 0 0 50px;
+      & button{
+        font-size: 18px;
+      }
+
+      & .info{
         font-size: 20px;
+      }
     }
 `;
 

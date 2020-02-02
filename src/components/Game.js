@@ -6,10 +6,14 @@ import GameInfo from './GameInfo';
 
 const StyledGame = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  max-width: 33%;
-  margin: 300px auto 0;
+  margin: 150px auto 0;
+
+  @media (min-width: 991.98px) {
+    margin-top: 300px;
+    flex-direction: row;
+  }
 `;
 
 function Game() {

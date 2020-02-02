@@ -14,7 +14,18 @@ const StyledSquare = styled.button`
   padding: 0;
   text-align: center;
   width: 112px;
-  height: 112px;
+  
+  &::before {
+    content: "";
+    display: block;
+    padding-top: ${(props) => (props.value ? 'calc((100% - 34px) / 2)' : '50%')};
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: ${(props) => (props.value ? 'calc((100% - 34px) / 2)' : '50%')};
+  }
 
   &:focus{
     outline: none;
@@ -30,6 +41,7 @@ function Square(props) {
       type="button"
       inWinLine={inWinLine}
       onClick={onClick}
+      value={value}
     >
       {value}
     </StyledSquare>

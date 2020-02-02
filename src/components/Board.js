@@ -4,12 +4,22 @@ import styled from 'styled-components';
 import Square from './Square';
 
 const StyledBoard = styled.div`
-  width: 60%;
+  width: min(100%, 300px);
+  margin: auto;
+
+  @media (min-width: 991.98px) {
+    margin: 0;
+  }
+
+  @media (min-width: 1980px) {
+    margin: 0;
+  }
 `;
 
 const StyledBoardRow = styled.div`
   display: flex;
   justify-content: center;
+
   &:after {
     clear: both;
     content: "";
