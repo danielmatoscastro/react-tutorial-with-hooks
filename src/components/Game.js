@@ -10,9 +10,28 @@ const StyledGame = styled.div`
   justify-content: center;
   margin: 150px auto 0;
 
+  & .game-board {
+    width: min(100%, 300px);
+    margin: auto;
+    background-color: orange;
+  }
+
+  & .game-game-info {
+    width: min(100%, 300px);
+    margin: 35px auto 0;
+  }
+
   @media (min-width: 991.98px) {
     margin-top: 300px;
     flex-direction: row;
+
+    & .game-board{
+      margin-right: 0;
+    }
+
+    & .game-game-info{
+      margin-left: 50px;
+    }
   }
 `;
 
@@ -75,11 +94,13 @@ function Game() {
   return (
     <StyledGame>
       <Board
+        className="game-board"
         squares={current.squares}
         onClick={(i) => handleClick(i)}
         winLine={current.winLine}
       />
       <GameInfo
+        className="game-game-info"
         history={history}
         stepNumber={stepNumber}
         xIsNext={xIsNext}

@@ -5,9 +5,6 @@ import styled from 'styled-components';
 import calculateWinner from '../calculateWinner';
 
 const StyledGameInfo = styled.div`
-    width: min(100%, 300px);
-    margin: 35px auto 0;
-
     & ol{
         list-style-type: none;
         padding: 0;
@@ -21,12 +18,10 @@ const StyledGameInfo = styled.div`
         font-size: 16px;
         display: block;
         margin: auto;
-
     }
 
     & input[type=checkbox] {
         background-color: #61DAFB;
-        
     }
 
     & .info{
@@ -35,7 +30,6 @@ const StyledGameInfo = styled.div`
     }
 
     @media (min-width: 991.98px) {
-      margin: 0 0 0 50px;
       & button{
         font-size: 18px;
       }
@@ -48,7 +42,7 @@ const StyledGameInfo = styled.div`
 
 function GameInfo(props) {
   const {
-    history, stepNumber, xIsNext, jumpTo,
+    history, stepNumber, xIsNext, jumpTo, className,
   } = props;
   const [ascOrder, setAscOrder] = useState(true);
 
@@ -96,7 +90,7 @@ function GameInfo(props) {
   const moves = renderMoves();
 
   return (
-    <StyledGameInfo>
+    <StyledGameInfo className={className}>
       <div className="info">{status}</div>
       <div className="info">{lastPosition}</div>
       <label htmlFor="order-checkboox" className="info">
@@ -118,6 +112,11 @@ GameInfo.propTypes = {
   stepNumber: PropTypes.number.isRequired,
   xIsNext: PropTypes.bool.isRequired,
   jumpTo: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+GameInfo.defaultProps = {
+  className: '',
 };
 
 export default GameInfo;

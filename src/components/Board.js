@@ -3,19 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Square from './Square';
 
-const StyledBoard = styled.div`
-  width: min(100%, 300px);
-  margin: auto;
-
-  @media (min-width: 991.98px) {
-    margin: 0;
-  }
-
-  @media (min-width: 1980px) {
-    margin: 0;
-  }
-`;
-
 const StyledBoardRow = styled.div`
   display: flex;
   justify-content: center;
@@ -27,7 +14,9 @@ const StyledBoardRow = styled.div`
   }
 `;
 
-function Board({ winLine, squares, onClick }) {
+function Board({
+  winLine, squares, onClick, className,
+}) {
   function renderSquare(i) {
     const inWinLine = winLine ? winLine.includes(i) : false;
 
@@ -51,9 +40,9 @@ function Board({ winLine, squares, onClick }) {
   }
 
   return (
-    <StyledBoard>
+    <div className={className}>
       {linhas}
-    </StyledBoard>
+    </div>
   );
 }
 
@@ -61,10 +50,12 @@ Board.propTypes = {
   winLine: PropTypes.arrayOf(PropTypes.number),
   squares: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 Board.defaultProps = {
   winLine: null,
+  className: '',
 };
 
 export default Board;
