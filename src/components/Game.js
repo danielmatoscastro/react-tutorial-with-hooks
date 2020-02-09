@@ -12,8 +12,7 @@ const StyledGame = styled.div`
 
   & .game-board {
     width: min(100%, 300px);
-    margin: auto;
-    background-color: orange;
+    margin: 0 auto;
   }
 
   & .game-game-info {
